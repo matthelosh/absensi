@@ -265,13 +265,16 @@
     				type: 'post',
     				data: dataLogin,
     				success: function(res) {
-						console.log(res);
+						// console.log(res);
     					if ( res == 'valid') {
 							window.location.href = 'index.php';
 						} else if ( res == 'invalid') {
 							$('#password-msg').fadeIn(350).html('<h4>Kata Kunci tidak sesuai. Mohon ulangi lagi.');
 						} else if ( res === 'no_user' ) {
 							$("#nip-msg").fadeIn(500).html('<h4>Anda belum terdaftar ke Sistem. Harap hubungi Admin.</h4>');
+						} else if ( res == 'invalid_level') {
+							$('#level-msg').fadeIn(500).html('<h4>Pilihan Level Pengguna tidak sesuai.</h4>')
+							$('#level').focus();
 						}
     				}
     			});

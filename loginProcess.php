@@ -14,8 +14,10 @@ $result = mysqli_query($conn, $sql);
 
 if ( mysqli_num_rows($result) > 0 ){
 	$r=mysqli_fetch_assoc($result);
-	// echo $r['password'].'Password DB<br>';
-	// echo $pass.'Password input<br>';
+	if ($level !== $r['level']) {
+		echo 'invalid_level';
+		return false;
+	}
 	if ( $r['password'] == $pass) {
 		$_SESSION['user'] = $user;
 		$_SESSION['level'] = $level;
