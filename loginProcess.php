@@ -9,7 +9,7 @@ $level = strip_tags($_POST['level']);
 
 
 // echo $qry_table;
-$sql = "SELECT * FROM user WHERE uname = '$user'";
+$sql = "SELECT * FROM user WHERE uname = '$user' AND isActive = 1";
 $result = mysqli_query($conn, $sql);
 
 if ( mysqli_num_rows($result) > 0 ){

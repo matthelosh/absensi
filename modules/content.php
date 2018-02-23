@@ -1,6 +1,26 @@
 <?php
     $page = isset($_GET['p'])?$_GET['p']:null;
     switch($page) {
+      ## Tampilan Untuk Admin
+      case "user":
+        include 'user.php';
+      break;
+      case "admin_kelas":
+        include 'admin_kelas.php';
+      break;
+
+
+      ## Tampilan Untuk Guru
+
+
+
+      ## Tampilan Untuk Kepala Sekolah
+
+
+      ## Tampilan Untuk Wali Kelas
+
+
+      ## Tampilan Default
       default:
         echo '<section class="content-header">
             <h1>
