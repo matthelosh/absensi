@@ -168,7 +168,7 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
-<script src="bower_components/raphael/raphael.min.js"></script> -->
+<script src="bower_components/raphael/raphael.min.js"></script> 
 <!-- <script src="bower_components/morris.js/morris.min.js"></script> -->
 <!-- Sparkline -->
 <script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
@@ -212,16 +212,7 @@
   })
 </script>
 <script>
-  $(function () {
-    $('#tbl_user').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
+  
 </script>
 </body>
 </html>

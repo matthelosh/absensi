@@ -1,7 +1,32 @@
 /* Administrasi User Style */
-.deactivate_user {
+.deactivate_user,
+.deactivate_kelas {
     color: #569956;
 }
-.activate_user {
+.activate_user,
+.activate_kelas {
     color: #995656;
+}
+
+
+#mdal_mng_rombel .modal-dialog{
+    width: 95%!important;
+}
+.modal .modal-dialog .modal-header {
+    background: #569956;
+    color: #efefef;
+}
+
+.modal .modal-dialog .modal-footer {
+    background: hsl(120, 26%, 54%);
+    color: #efefef;
+}
+
+.btn {
+    border-radius: 0!important;
+}
+
+.modal .modal-dialog .modal-body #col-anggota {
+    max-height: 500px!important;
+    overflow-y: scroll;
 }

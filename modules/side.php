@@ -17,15 +17,15 @@
         $smq = mysqli_query($conn, "SELECT * FROM menu WHERE parent = '$m_id'");
         if( mysqli_num_rows($smq) < 1 ) {
             echo "
-                <li class=\"treeview\">
-                    <a href=\"$m[link]\"><i class=\"$m[icon]\"></i> $m[menu]</a>
+                <li>
+                    <a href=\"$m[link]\" title=\"$m[menu]\"><i class=\"$m[icon]\"></i> <span>$m[menu]</span></a>
                 </li>
             ";
         } else {
             echo "
             <li class=\"treeview\">
                 
-                <a href=\"$m[link]\"><i class=\"$m[icon]\"></i> <span>$m[menu]</span>
+                <a href=\"$m[link]\" title=\"$m[menu]\"><i class=\"$m[icon]\"></i> <span>$m[menu]</span>
                 <span class=\"pull-right-container\">
                   <i class=\"fa fa-angle-left pull-right\"></i>
                 </span>
@@ -35,7 +35,7 @@
                     while($sm = mysqli_fetch_assoc($smq)) {
                         echo "
                             <li>
-                                <a href=\"$sm[link]\"><i class=\"$sm[icon]\"></i> $sm[menu]</a>
+                                <a href=\"$sm[link]\" title=\"$m[menu]\"><i class=\"$sm[icon]\"></i> <span>$sm[menu]</span></a>
                             </li>
                         ";
                     }

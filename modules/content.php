@@ -5,8 +5,20 @@
       case "user":
         include 'user.php';
       break;
-      case "admin_kelas":
+      case "adm_kelas":
         include 'admin_kelas.php';
+      break;
+      case "adm_mapel":
+        include 'admin_mapel.php';
+      break;
+      case "adm_siswa":
+        include 'admin_siswa.php';
+      break;
+      case "adm_rombel":
+        include 'admin_rombel.php';
+      break;
+      case "adm_jadwal";
+        include 'admin_jadwal.php';
       break;
 
 
