@@ -2,8 +2,7 @@
 
 $(document).ready(function() {
 
-    // $("#tbl_siswa").DataTable();
-    $('.dataTable').DataTable();
+   
 // Administrasi User
     $('#frm_add_user').submit(function(e) {
         e.preventDefault();
@@ -451,6 +450,29 @@ $(document).ready(function() {
 
     });
 
+    $("#form_rombel").find(".auto_wali").on("keyup", function(){
+        var string = $(this).val();
+        if( string.length >= 3 ) {
+            $.ajax({
+                method: 'post',
+                url: 'modules/action/adm_rombel.php?mod=get_wali',
+                data: {"q":string},
+                success: function(res) {
+                    $("#list_wali").html(res);
+                }
+            });
+        } else {
+            $(".ul_wali").slideUp();
+        }
+    });
+
+    $("#list_wali").on('click', '.ul_wali li', function(e) {
+        var nip_wali = $(this).find('.nip_wali').text();
+        var wali = $(this).find('.wali').text();
+        $("#nip_wali").val(nip_wali);
+        $("#wali").val(wali);
+        $(".ul_wali").fadeOut();
+    });
     // Form Edit Rombel
     $('.btn_edit_rombel').click(function(e){
         e.preventDefault();
@@ -735,5 +757,189 @@ $(document).ready(function() {
             
         }
     });
+
+// Administrasi Jadwal
+    $("#btn_add_jadwal").click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            method: 'post',
+            url: 'modules/action/adm_jadwal.php?mod=get_hari',
+            success: function(res) {
+                $("#hari").html(res);
+            }
+        });
+        auto_complete('#nama_guru', 'get_guru', '.auto_list', '.ul_auto');
+        
+        auto_complete('#nama_mapel', 'get_mapel', '.auto_list', '.ul_auto');
+        
+        auto_complete('#nama_kelas', 'get_rombel', '.auto_list', '.ul_auto');
+        
+        $("#mode_form").text("Tambah Jadwal");
+        $("#mode_aksi").text("add_jadwal");
+        $("#mdal_frm_jadwal").modal();
+    });
+
+
+    function auto_complete(el, mod, comp, list) {
+        $("#frm_jadwal").find(el).on("keyup", function(){
+            var id = $(this).data('id');
+            var string = $(this).val();
+            if( string.length >= 3 ) {
+                $.ajax({
+                    method: 'post',
+                    url: 'modules/action/adm_jadwal.php?mod='+mod,
+                    data: {"q":string},
+                    success: function(res) {
+                        $("#"+id).siblings(comp).html(res);
+                        return false;
+                    }
+                });
+            } else {
+                $(list).slideUp();
+            }
+            // alert(string);
+        });
+
+        $(".auto_list").on('click', '.ul_guru li', function(e) {
+            var parent = $(this).closest('.form-group').data('id');
+            var value = $(this).find('.value').text();
+            var text = $(this).find('.text').text();
+            $("#nip_guru").val(value);
+            $("#nama_guru").val(text);
+            $(".ul_auto").fadeOut();
+        });
+        $(".auto_list").on('click', '.ul_mapel li', function(e) {
+            var parent = $(this).closest('.form-group').data('id');
+            var value = $(this).find('.value').text();
+            var text = $(this).find('.text').text();
+            $("#kode_mapel").val(value);
+            $("#nama_mapel").val(text);
+            $(".ul_auto").fadeOut();
+        });
+        $(".auto_list").on('click', '.ul_rombel li', function(e) {
+            var parent = $(this).closest('.form-group').data('id');
+            var value = $(this).find('.value').text();
+            var text = $(this).find('.text').text();
+            $("#kode_kelas").val(value);
+            $("#nama_kelas").val(text);
+            $(".ul_auto").fadeOut();
+        });
+    }
+
+    // New Jadwal
+    $("#frm_jadwal").on("submit", function(e) {
+        e.preventDefault();
+        var mod = $(this).find("#mode_aksi").text();
+        var idJadwal = $("#idjadwal").val();
+        var data = {
+            "idjadwal": idJadwal,
+            "hari": $("#hari").val(),
+            "nip_guru": $("#nip_guru").val(),
+            "kode_mapel": $("#kode_mapel").val(),
+            "kode_rombel": $("#kode_kelas").val(),
+            "jamke": $("#jamke").val()
+        }
+        if ($("#hari").val() == '0') {
+            alert('Pilih Hari Dulu');
+            $("#hari").focus();
+            return false;
+        } else {
+            $.ajax({
+                method: 'post',
+                url: 'modules/action/adm_jadwal.php?mod='+mod,
+                data: data,
+                dataType: 'json',
+                success: function(res){
+                    if (res.sukses == true) {
+                        alert(res.msg);
+                        location.reload();
+                        $(this).reset();
+                    }
+                }
+            });
+        }
+    });
+
+
+    $("#tbody_jadwal").on('click', '.deactivate_jadwal', function(e) {
+        e.preventDefault();
+        var id = $(this).closest('tr').find('td.kode_jadwal').text();
+        var oyi = confirm('Yakin ingin me-non-aktifkan jadwal '+ id +'?');
+        // alert(id);
+        if(oyi) {
+            $.ajax({
+                method: 'post',
+                url: 'modules/action/adm_jadwal.php?mod=deactivate',
+                data: {'id': id},
+                success: function(res) {
+                    alert(res);
+                    location.reload();
+                
+                    // console.log(res);
+                }
+            });
+        } else {
+            return false;
+        }
+    });
+    $('#tbody_jadwal').on('click', '.activate_jadwal', function(e) {
+        e.preventDefault();
+        var id = $(this).closest('tr').find('td.kode_jadwal').text();
+        var oyi = confirm('Yakin mengaktifkan Jadwal '+ id +'?');
+        if ( oyi ) {
+            $.ajax({
+                method: 'post',
+                url: 'modules/action/adm_jadwal.php?mod=activate',
+                data: {'id': id},
+                success: function(res) {
+                    alert(res);
+                    location.reload();
+                    
+                    // console.log(res);
+                }
+            });
+        } else {
+            return false;
+        }
+    });
+
+   
+    
+    $('#tbody_jadwal').on('click', '.btn_edit_jadwal', function(e) {
+        e.preventDefault();
+        var id = $(this).closest('tr').find('td.kode_jadwal').text();
+        $.ajax({
+            method: 'post',
+            url: 'modules/action/adm_jadwal.php?mod=edit_jadwal',
+            data: {'id': id },
+            dataType: 'json',
+            success: function(res) {
+                
+            }
+        });
+
+
+        auto_complete('#nama_guru', 'get_guru', '.auto_list', '.ul_auto');
+        
+        auto_complete('#nama_mapel', 'get_mapel', '.auto_list', '.ul_auto');
+        
+        auto_complete('#nama_kelas', 'get_rombel', '.auto_list', '.ul_auto');
+        
+        $("#mode_form").text("Edit Jadwal");
+        $("#mode_aksi").text("edit_jadwal");
+        $("#mdal_frm_jadwal").modal();
+    });
+
+    function load_jadwal() {
+        $.ajax({
+            method: 'post',
+            url: 'modules/action/adm_jadwal.php?mod=get_al_jadwal',
+            success: function(res) {
+                $("#tbody_jadwal").html(res);
+            }
+        })
+    }
+     // Data Table;
+     $('.dataTable').DataTable();
     
 });

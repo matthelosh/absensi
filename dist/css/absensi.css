@@ -30,3 +30,20 @@
     max-height: 500px!important;
     overflow-y: scroll;
 }
+
+.ul_wali, .ul_auto {
+    background: rgba(97, 167, 84, 0.774);
+    color: #efefef;
+    list-style: none;
+    padding: 0px;
+    position: absolute;
+    z-index: 10;
+    width: 95%;
+    box-sizing: border-box;
+}
+
+.ul_auto li {
+    padding: 10px 5px;
+    border-bottom: 1px dashed white;
+    cursor: pointer;
+}

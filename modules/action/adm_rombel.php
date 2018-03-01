@@ -18,6 +18,17 @@ switch($mode) {
             echo '<option value = "'.$r['id'].'" '.$selected.'>'.$r['nama_rombel'].'</option>';
         }
     break;
+    case "get_wali":
+        $q = $_POST['q'];
+        $g_wali = mysqli_query($conn, "SELECT * FROM user WHERE nama LIKE '%$q%'");
+        echo "<ul class='ul_wali'>";
+        while($w = mysqli_fetch_assoc($g_wali)) {
+            echo "
+                <li><span class='nip_wali hidden'>$w[uname]</span> <span class='wali'>$w[nama]</span></li>
+            ";
+        }
+        echo "</ul>";
+    break;
     case "add_rombel":
         $id = $_POST['idrombel'];
         $nama_rombel = $_POST['nama_rombel'];

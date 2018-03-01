@@ -23,7 +23,21 @@
         $sql = "SELECT * FROM siswa";
         $qry = mysqli_query($conn, $sql);
         if (mysqli_num_rows($qry) < 1) {
-            echo 'Belum ada data Siswa';
+            echo "
+                <div class=\"box box-widget widget-user-2\">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class=\"widget-user-header bg-red\">
+                        <div class=\"widget-user-image pull-left\">
+                            <h1><i class=\"fa fa-calendar\"></i></h1>
+                        </div>
+                        <!-- /.widget-user-image -->
+                        <h3 class=\"widget-user-username\">Belum Ada Data Jadwal</h3>
+                        <h5 class=\"widget-user-desc\">Tambahkan Jadwal Pembelajaran Dulu</h5>
+                    </div>
+                    <div class=\"widget-user-footer\">
+                    </div>
+                </div>
+            ";
         } else {
             ?>
                     <div class="box-body">
