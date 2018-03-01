@@ -46,6 +46,7 @@
                             <table id="tbl_jadwal" class="table table-bordered dataTable" role="grid">
                                 <thead>
                                     <tr role="row">
+                                        <th class="hidden"></th>
                                         <th class="sorting_asc hidden-xs" tabindex="1">No</th>
                                         <th class="sorting_asc" tabindex="2">Hari</th>
                                         <th class="sorting_asc " tabindex="3">Guru Pengajar</th>
@@ -61,7 +62,8 @@
             while($jadwal = mysqli_fetch_assoc($qry)) {
                 echo "
                     <tr>
-                        <td class='kode_jadwal hidden-xs'> ".$no; 
+                        <td class='kode_jadwal hidden'>$jadwal[id]</td>
+                        <td class='hidden-xs'> ".$no; 
                         echo $jadwal['isActive'] == 0? "<i class='fa fa-close' style='color: red'></i>" : "<i class='fa fa-check' style='color:green'></i>";
                         echo "
                         </td><td>$jadwal[hari]</td>

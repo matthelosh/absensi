@@ -780,6 +780,7 @@ $(document).ready(function() {
     });
 
 
+
     function auto_complete(el, mod, comp, list) {
         $("#frm_jadwal").find(el).on("keyup", function(){
             var id = $(this).data('id');
@@ -853,8 +854,10 @@ $(document).ready(function() {
                     if (res.sukses == true) {
                         alert(res.msg);
                         location.reload();
-                        $(this).reset();
+                    } else {
+                        console.log(res);
                     }
+                    // alert(res);
                 }
             });
         }
@@ -914,9 +917,17 @@ $(document).ready(function() {
             data: {'id': id },
             dataType: 'json',
             success: function(res) {
-                
+                $("#hari").html(res.hari);
+                $("#nip_guru").val(res.nip_guru);
+                $("#nama_guru").val(res.nama_guru);
+                $("#kode_kelas").val(res.kode_kelas);
+                $("#nama_kelas").val(res.nama_kelas);
+                $("#kode_mapel").val(res.kode_mapel);
+                $("#nama_mapel").val(res.nama_mapel);
+                $("#jamke").val(res.jamke);
             }
         });
+        // alert(id);
 
 
         auto_complete('#nama_guru', 'get_guru', '.auto_list', '.ul_auto');
@@ -926,8 +937,9 @@ $(document).ready(function() {
         auto_complete('#nama_kelas', 'get_rombel', '.auto_list', '.ul_auto');
         
         $("#mode_form").text("Edit Jadwal");
-        $("#mode_aksi").text("edit_jadwal");
+        $("#mode_aksi").text("update_jadwal");
         $("#mdal_frm_jadwal").modal();
+        $("#idjadwal").val(id);
     });
 
     function load_jadwal() {
@@ -940,6 +952,12 @@ $(document).ready(function() {
         })
     }
      // Data Table;
-     $('.dataTable').DataTable();
+     $('.dataTable').DataTable({
+        dom: 'Bfrtip',
+        "lengthMenu": [ 5, 15, 25, 75, "All" ],
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+     });
     
 });

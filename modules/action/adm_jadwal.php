@@ -19,8 +19,72 @@ switch($mode){
         $id = $_POST['id'];
         $get_jadwal = mysqli_query($conn, "SELECT * FROM jadwal WHERE id = '$id'");
         $jadwal = mysqli_fetch_assoc($get_jadwal);
+        $jd_r = mysqli_num_rows($get_jadwal);
         
+        // while($r = mysqli_fetch_assoc($qry)) {
+        //     if($r['id'] == $id ) {
+        //         $selected = "Selected";
+        //     } else {
+        //         $selected = "";
+        //     }
 
+        //     echo '<option value = "'.$r['id'].'" '.$selected.'>'.$r['nama_rombel'].'</option>';
+        // }
+        $hari_selected = "<option value='0'>--Pilih Hari--</option>";
+        $selected;
+        for ($i=0; $i < $jml_hari; $i++) {
+            if($hari[$i] == $jadwal['hari']) {
+                $selected = "selected";
+            } else {
+                $selected = "";
+            }
+        $hari_selected .= "<option value='$hari[$i]' $selected>$hari[$i]</option>";
+        }
+
+
+        $nip_guru = $jadwal['kode_guru'];
+        $kode_mapel = $jadwal['kode_mapel'];
+        $kode_rombel = $jadwal['kode_kelas'];
+        $jamke = $jadwal['jamke'];
+        
+        $hari;
+        $s_guru = mysqli_query($conn, "SELECT * FROM user WHERE uname = '$nip_guru'");
+        $g = mysqli_fetch_assoc($s_guru);
+        $g_r = mysqli_num_rows($s_guru);
+        $guru = $g['nama'];
+        
+        $s_mapel = mysqli_query($conn, "SELECT * FROM mapel WHERE kode_mapel = '$kode_mapel'");
+        $m = mysqli_fetch_assoc($s_mapel);
+        $mapel = $m['mapel'];
+
+        $s_rombel = mysqli_query($conn, "SELECT * FROM rombel WHERE id = '$kode_rombel'");
+        $r = mysqli_fetch_assoc($s_rombel);
+        $rombel = $r['nama_rombel'];
+
+
+        $response = array("hari"=>$hari_selected,"nip_guru"=>$nip_guru, "nama_guru"=>$guru, "kode_mapel"=>$kode_mapel, "kode_kelas"=>$kode_rombel, "nama_mapel"=>$m['mapel'], "nama_kelas"=>$rombel, "jamke"=>$jamke);
+        print_r(json_encode($response));
+
+    break;
+    
+    case "update_jadwal":
+        $id = $_POST['idjadwal'];
+        $hari = $_POST['hari'];
+        $nip_guru = $_POST['nip_guru'];
+        $kode_mapel = $_POST['kode_mapel'];
+        $kode_rombel = $_POST['kode_rombel'];
+        $jamke = $_POST['jamke'];
+        $update = mysqli_query($conn, "UPDATE jadwal set hari = '$hari',
+                                                        kode_guru = '$nip_guru',
+                                                        kode_mapel = '$kode_mapel',
+                                                        kode_kelas = '$kode_rombel',
+                                                        jamke = '$jamke'
+        WHERE id = '$id'");
+        if ($update) {
+            $res = array("sukses"=>true, "kode"=>"ok", "msg"=>"Jadwal berhasil diperbarui.");
+            print_r(json_encode($res));
+        }
+        // echo 'Update Jadwal';
     break;
 
     case "get_guru":

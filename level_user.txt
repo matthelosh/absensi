@@ -1,0 +1,6 @@
+1 = Admin,
+2 = guru,
+3 = staf,
+4 = wali_kelas,
+5 = kepsek,
+6 = ketua_kelas

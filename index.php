@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css"> -->
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="dist/css/absensi.css">
@@ -39,6 +41,7 @@
   <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <link rel="stylesheet" href="dist/css/button.dataTables.min.js">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -139,7 +142,20 @@
       <div class="row">
         <div class="col-xs-12">
           <?php
-            include 'modules/content.php';
+            $level = $_SESSION['level'];
+            if ( $level == '1' ) { // Level Admin
+              include 'modules/content.php';
+            } else if ( $level == '2' ) { // Level Guru
+              include 'module_guru/content.php';
+            } else if ( $level == '3' ) { // Level Staf
+              include 'module_staf/content.php';
+            } else if ( $level == '4' ) { // Level Wali Kelas
+              include 'module_wali_kelas/content.php';
+            } else if ( $level == '5' ) { // Level Kepala Sekolah
+              include 'module_kepsek/content.php';
+            } else if ( $level == '6' ) { // Level Ketua Kelas
+              include 'module_ketua_kelas/content.php';
+            }
           ?>
         </div>
       </div>
@@ -188,14 +204,34 @@
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Data Tabel -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<!-- <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script> -->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+    <!-- https://code.jquery.com/jquery-1.12.4.js -->
+    <!-- https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js
+    https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js
+    https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js
+    https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js
+    https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js
+    https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js
+    https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js
+    https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js -->
+
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<!-- <script src="dist/js/pages/dataTables.buttons.min.js.js"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="dist/js/absensi.js"></script>

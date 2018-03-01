@@ -64,9 +64,9 @@
                         <td class='nis hidden-xs'>$siswa[nis]</td>
                         <td>$siswa[nama]</td>
                         <td>";
-                            $get_kelas = mysqli_query($conn,"SELECT * FROM kelas WHERE kode_kelas = '$siswa[kelas]'");
+                            $get_kelas = mysqli_query($conn,"SELECT * FROM rombel WHERE id = '$siswa[kelas]'");
                             $kelas = mysqli_fetch_assoc($get_kelas);
-                            echo $kelas['kelas'];
+                            echo $kelas['nama_rombel'];
 
                         echo "</td>
                         <td class='hidden-xs'>$siswa[hp]</td>

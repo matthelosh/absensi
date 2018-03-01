@@ -1,0 +1,5 @@
+a = alpa,
+i = ijin,
+s = sakit,
+h = hadir,
+t = telat

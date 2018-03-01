@@ -20,16 +20,10 @@
       case "adm_jadwal";
         include 'admin_jadwal.php';
       break;
+      case "adm_absensi";
+        include 'admin_absensi.php';
+      break;
 
-
-      ## Tampilan Untuk Guru
-
-
-
-      ## Tampilan Untuk Kepala Sekolah
-
-
-      ## Tampilan Untuk Wali Kelas
 
 
       ## Tampilan Default

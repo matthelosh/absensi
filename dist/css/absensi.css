@@ -47,3 +47,23 @@
     border-bottom: 1px dashed white;
     cursor: pointer;
 }
+
+button.dt-button {
+    border: none!important;
+    border-radius: 0!important;
+    padding: 5px 25px;
+    background: #569956!important;
+    color: #efefef!important;
+}
+
+li.paginate_button {
+    padding: 0!important;
+    margin: 0!important;
+    
+}
+li.paginate_button:hover {
+    border: none!important;
+}
+li.paginate_button a {
+    margin: none!important;
+}
